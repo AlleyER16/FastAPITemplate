@@ -1,0 +1,15 @@
+Local deployment
+    create venv
+    install from requirements.txt: pip install -r requirements.txt
+    update env file with appropriate credentials
+    run uvicorn: uvicorn app.index:app --reload
+
+    if migration not needed delete alembic and do the following
+        initialize alembic: alembic init ALEMBIC_PATH
+        update ALEMBIC_PATH/env.py with app.models.Base.metadata and config.set_main_option("sqlalchemy.url", "postgresql+psycopg2://USERNAME:PASSWORD@HOST:PORT/DB")
+        create as many migrations as you want
+
+Heroky deployment
+    Upload without venv, .env, deployment instructions.txt(Optional)
+    Add environment variable on the server
+    upgrade to lateset migration on server: alembic upgrade head
